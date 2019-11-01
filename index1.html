@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -8,24 +9,49 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>Olá, mundo!</title>
+    <title>Conversor Moedas</title>
   </head>
   <body>
     
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">Fluid jumbotron</h1>
-          <p class="lead">Este é um jumbotron modificado que ocupa todo o espaço horizontal de seu elemento pai.</p>
+          <h1 class="display-4">Conversor de Moedas</h1>
+          <p class="lead">Converte Dólar americano em Reais.</p>
+        <form>
+            <input id="dolar" type="number" class="form-control" placeholder="digite o valor aqui em dólares">
+        </form>
+
         </div>
       </div>
+    
+        <input type="button" value="Converter" onclick="conv()">
+        <h2>
+            Valor em Reais:
+        </h2>
+
 
     <!-- JavaScript (Opcional) -->
+
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  </body>
-</html>
 
+    <script>
+            function conv (){
+                $.ajax({
+                    url:"https://api.exchangeratesapi.io/latest?base=USD",
+                    type:"GET"
+                }).done(function( data ){
+                    console.log(data);
+                    var result =  data.rates.BRL * document.querySelector("#dolar").value;
+                    document.querySelector("h2").innerHTML = "Valor em Reais: " + result;
+                });
+            }
+
+        </script>
+    
+</body>
+</html>
 
 
